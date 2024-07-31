@@ -85,7 +85,7 @@ const ApplyForJobForm = ({ show, onHide, job }) => {
                 </Field>
               </Form.Group>
 
-              <Button type="submit">Submit</Button>
+              <Button style={{marginTop:"20px"}} type="submit">Submit</Button>
             </FormikForm>
           )}
         </Formik>
