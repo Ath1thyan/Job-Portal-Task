@@ -6,7 +6,7 @@ const Header = () => {
     <header className="header">
       <Navbar bg="dark" variant="dark">
         <Container>
-          <Navbar.Brand href="/">Job Portal</Navbar.Brand>
+          <Navbar.Brand href="/">Sudo Labs Job Portal</Navbar.Brand>
         </Container>
       </Navbar>
     </header>

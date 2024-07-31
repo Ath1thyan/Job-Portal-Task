@@ -40,6 +40,10 @@ body, html {
     width: 50px;
     height: 50px;
     cursor: pointer;
+    background-color: black;
+    border-radius: 50%;
+    padding: 5px;
+    object-fit: contain;
   }
   
   .job-item {

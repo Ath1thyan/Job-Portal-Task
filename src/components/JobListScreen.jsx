@@ -50,7 +50,7 @@ const JobListScreen = () => {
           {filteredJobs.map(job => (
             <Col key={job.id} xs={12} sm={6} md={4} lg={4} className="job-item">
               <div className="job-content">
-                <img src={job.logo} alt="company logo" className="company-logo" />
+                <img src="/media/rocket.svg" alt="company logo" className="company-logo" />
                 <div className="job-info">
                   <h4 onClick={() => handleJobClick(job)}>{job.title}</h4>
                   <p>{job.company}</p>
