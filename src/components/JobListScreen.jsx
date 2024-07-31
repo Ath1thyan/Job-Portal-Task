@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Button, Form, Badge } from 'react-bootstrap';
+import { Button, Form, Badge, Row, Col } from 'react-bootstrap';
 import JobDetailsModal from './JobDetailsModal';
 import ApplyForJobForm from './ApplyForJobForm';
-
+import ViewJobApplication from './ViewJobApplication';
 
 const JobListScreen = () => {
   const jobs = useSelector(state => state.jobs.jobs);
@@ -11,6 +11,7 @@ const JobListScreen = () => {
   const [selectedJob, setSelectedJob] = useState(null);
   const [showDetailsModal, setShowDetailsModal] = useState(false);
   const [showApplyForm, setShowApplyForm] = useState(false);
+  const [showApplicationModal, setShowApplicationModal] = useState(false);
 
   const filteredJobs = jobs.filter(job =>
     job.title.toLowerCase().includes(searchTerm.toLowerCase())
@@ -26,6 +27,11 @@ const JobListScreen = () => {
     setShowApplyForm(true);
   };
 
+  const handleViewApplicationClick = job => {
+    setSelectedJob(job);
+    setShowApplicationModal(true);
+  };
+
   return (
     <div className="container">
       <h1>Job List</h1>
@@ -34,34 +40,39 @@ const JobListScreen = () => {
         placeholder="Search jobs..."
         value={searchTerm}
         onChange={e => setSearchTerm(e.target.value)}
+        className="mb-3"
       />
-      <div className="job-list">
+      <Row className="job-list">
         {filteredJobs.map(job => (
-          <div key={job.id} className="job-item">
-            <img src={job.logo} alt="logo" className="company-logo" />
-            <div className="job-info">
-              <h4 onClick={() => handleJobClick(job)}>{job.title}</h4>
-              <p>{job.company}</p>
-              <p>Experience: {job.experience} years</p>
-              <div className="skills">
-                {job.skills.map(skill => (
-                  <Badge key={skill} pill bg="primary" className="mr-1">
-                    {skill}
-                  </Badge>
-                ))}
+          <Col key={job.id} xs={12} sm={6} md={4} lg={3} className="job-item">
+            <div className="job-content">
+              <img src={job.logo} alt="company logo" className="company-logo" />
+              <div className="job-info">
+                <h4 onClick={() => handleJobClick(job)}>{job.title}</h4>
+                <p>{job.company}</p>
+                <p>Experience: {job.experience} years</p>
+                <div className="skills">
+                  {job.skills.map(skill => (
+                    <Badge key={skill} pill bg="primary" className="mr-1">
+                      {skill}
+                    </Badge>
+                  ))}
+                </div>
+                <p>{job.description}</p>
+                {job.applied ? (
+                  <Button variant="success" onClick={() => handleViewApplicationClick(job)}>
+                    View Application
+                  </Button>
+                ) : (
+                  <Button variant="primary" onClick={() => handleApplyClick(job)}>
+                    Apply for Job
+                  </Button>
+                )}
               </div>
-              <p>{job.description}</p>
-              <Button
-                variant="primary"
-                disabled={job.applied}
-                onClick={() => handleApplyClick(job)}
-              >
-                {job.applied ? 'Applied' : 'Apply for Job'}
-              </Button>
             </div>
-          </div>
+          </Col>
         ))}
-      </div>
+      </Row>
 
       {selectedJob && (
         <JobDetailsModal
@@ -75,6 +86,14 @@ const JobListScreen = () => {
         <ApplyForJobForm
           show={showApplyForm}
           onHide={() => setShowApplyForm(false)}
+          job={selectedJob}
+        />
+      )}
+
+      {selectedJob && (
+        <ViewJobApplication
+          show={showApplicationModal}
+          onHide={() => setShowApplicationModal(false)}
           job={selectedJob}
         />
       )}

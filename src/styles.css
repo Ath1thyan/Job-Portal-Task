@@ -1,20 +1,40 @@
 .company-logo {
     width: 50px;
     height: 50px;
+    cursor: pointer;
   }
   
   .job-item {
+    padding: 10px;
+  }
+  
+  .job-content {
     border: 1px solid #ccc;
     padding: 10px;
-    margin: 10px 0;
+    height: 100%;
     display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
   
   .job-info {
-    margin-left: 10px;
+    margin-top: 10px;
   }
   
   .skills .badge {
     margin-right: 5px;
+    cursor: pointer;
+  }
+  
+  @media (max-width: 767px) {
+    .job-item {
+      margin-bottom: 10px;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .job-item {
+      margin-bottom: 20px;
+    }
   }
   
