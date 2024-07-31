@@ -38,7 +38,7 @@ const JobListScreen = () => {
       <div className="job-list">
         {filteredJobs.map(job => (
           <div key={job.id} className="job-item">
-            <img src={job.logo} alt="company logo" className="company-logo" />
+            <img src={job.logo} alt="logo" className="company-logo" />
             <div className="job-info">
               <h4 onClick={() => handleJobClick(job)}>{job.title}</h4>
               <p>{job.company}</p>
